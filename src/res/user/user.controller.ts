@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post, Req, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Post, UseGuards } from "@nestjs/common";
 import { UserService } from "./user.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
+import { User } from "src/decorators/user.decorator";
 
 @Controller("user")
 export class UserController {
@@ -21,9 +22,9 @@ export class UserController {
 
     @UseGuards(JwtAuthGuard)
     @Get("user-info")
-    async getUserInfo(@Req() req) {
+    async getUserInfo(@User() user) {
 
-        return `you're email is ${req.user.email}!`;
+        return `you're email is ${user.email}!`;
     }
 
 }
