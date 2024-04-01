@@ -17,7 +17,7 @@ export class ArticleService {
             userId: userId,
         });
 
-        return article
+        return article;
     }
 
     async getArticle(articleId: string) {
