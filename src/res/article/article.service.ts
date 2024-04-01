@@ -59,7 +59,7 @@ export class ArticleService {
             userId: userId,
         });
 
-        return { affected: deleteResult.affected };
+        return { affected: deleteResult?.affected };
     }
 
 

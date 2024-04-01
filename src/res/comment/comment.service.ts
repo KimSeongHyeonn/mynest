@@ -44,4 +44,15 @@ export class CommentService {
     }
 
 
+    async removeComment(commentId: string, userId: string) {
+        const deleteResult = await this.commentRepository.softDelete({
+            id: commentId,
+            userId: userId,
+        });
+
+        return { affected: deleteResult?.affected };
+    }
+
+
+
 }
