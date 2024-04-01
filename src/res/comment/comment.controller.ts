@@ -1,4 +1,4 @@
-import { Body, Controller, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Param, Post, Put, UseGuards } from "@nestjs/common";
 import { CommentService } from "./comment.service";
 import { JwtAuthGuard } from "src/auth/guards/jwt-auth.guard";
 import { User } from "src/decorators/user.decorator";
@@ -26,5 +26,23 @@ export class CommentController {
 
         return comment;
     }
+
+
+    @UseGuards(JwtAuthGuard)
+    @Put(":/id")
+    async modifyComment(@Body() body, @User() user, @Param("id") id) {
+        const content = body.content;
+        const commentId = id;
+        const userId = user.id;
+        const result = await this.commentService.modifyComment(
+            userId,
+            commentId,
+            content,
+        );
+
+        return result;
+
+    }
+
 
 }
